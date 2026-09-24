@@ -62,4 +62,4 @@ function initDb() {
   return db;
 }
 
-module.exports = { getDb, initDb };
+module.exports = { getDb, initDb, DATA_DIR, DB_PATH };

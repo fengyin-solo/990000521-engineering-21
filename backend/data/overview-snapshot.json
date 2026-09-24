@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "generated_by": "npm run snapshot (backend/db/snapshot.js)",
+  "totals": {
+    "users": 1,
+    "boards": 1,
+    "columns": 3,
+    "cards": 7
+  },
+  "empty_state": {
+    "no_boards": false,
+    "boards_without_columns": [],
+    "boards_without_cards": [],
+    "columns_without_cards": []
+  },
+  "boards": [
+    {
+      "id": 1,
+      "name": "My Project",
+      "owner": "demo",
+      "description": "A sample project board to get started",
+      "created_at": "2026-05-31 06:24:21",
+      "column_count": 3,
+      "card_count": 7,
+      "columns": [
+        {
+          "id": 1,
+          "name": "To Do",
+          "position": 0,
+          "card_count": 3,
+          "cards": [
+            {
+              "id": 1,
+              "title": "Set up project repository",
+              "priority": "high",
+              "due_date": "2026-06-05",
+              "position": 0
+            },
+            {
+              "id": 2,
+              "title": "Design database schema",
+              "priority": "high",
+              "due_date": "2026-06-08",
+              "position": 1
+            },
+            {
+              "id": 3,
+              "title": "Write API documentation",
+              "priority": "low",
+              "due_date": "2026-06-15",
+              "position": 2
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "In Progress",
+          "position": 1,
+          "card_count": 2,
+          "cards": [
+            {
+              "id": 4,
+              "title": "Implement user authentication",
+              "priority": "high",
+              "due_date": "2026-06-10",
+              "position": 0
+            },
+            {
+              "id": 5,
+              "title": "Build frontend layout",
+              "priority": "medium",
+              "due_date": "2026-06-12",
+              "position": 1
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "name": "Done",
+          "position": 2,
+          "card_count": 2,
+          "cards": [
+            {
+              "id": 6,
+              "title": "Project kickoff meeting",
+              "priority": "medium",
+              "due_date": "2026-05-28",
+              "position": 0
+            },
+            {
+              "id": 7,
+              "title": "Define project requirements",
+              "priority": "high",
+              "due_date": "2026-05-30",
+              "position": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

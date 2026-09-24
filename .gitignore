@@ -37,3 +37,7 @@ node_modules/
 
 # Trae
 .trae/
+
+# SQLite WAL side files (transient, recreated on any db access)
+*.db-shm
+*.db-wal

@@ -32,7 +32,7 @@ task-board/
 │   │   └── views/     # Page-level components
 │   └── vite.config.js
 ├── backend/           # Express API (port 3002)
-│   ├── db/            # Database init and seed scripts
+│   ├── db/            # Database init, seed, and overview snapshot scripts
 │   ├── middleware/    # Auth middleware (JWT)
 │   ├── routes/       # API route handlers
 │   ├── data/         # SQLite database file
@@ -68,6 +68,30 @@ npm run dev      # Start dev server on port 5174
 - Password: `demo123`
 
 The seed script creates a demo user with a sample board "My Project" containing 3 columns (To Do, In Progress, Done) and 7 sample cards.
+
+## Board Overview Snapshot (local dev)
+
+```bash
+cd backend
+npm run snapshot
+```
+
+Captures a read-only snapshot of the data behind the "My Boards" overview — board count, every board's columns and cards, column counts, and empty states (no boards, boards without columns/cards, columns without cards) — and writes it to `backend/data/overview-snapshot.json`. The output is deterministic (stable ordering, no run timestamps), so two runs can be compared with a plain diff, e.g. `git diff backend/data/overview-snapshot.json`. Re-running overwrites the previous snapshot.
+
+The script never modifies boards, columns, or cards: it opens the database read-only and only runs `SELECT` queries. (Like any SQLite reader of a WAL database it may leave transient `*.db-shm`/`*.db-wal` side files — the same files the dev server creates; the database content itself is untouched.)
+
+The run is split into stages and stops at the first failing stage with a clear message:
+
+| Stage | Checks | Exit code |
+|-------|--------|-----------|
+| `deps` | `better-sqlite3` loads, database file exists and opens read-only | 2 |
+| `collect` | overview queries succeed | 3 |
+| `write` | snapshot directory is writable, snapshot file is written | 4 |
+
+Environment overrides for local dev:
+
+- `TASKBOARD_DB_PATH` — read a different database file (default: `backend/data/taskboard.db`)
+- `SNAPSHOT_OUTPUT` — write the snapshot to a different path (default: `backend/data/overview-snapshot.json`)
 
 ## API Endpoints
 
