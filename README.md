@@ -69,6 +69,34 @@ npm run dev      # Start dev server on port 5174
 
 The seed script creates a demo user with a sample board "My Project" containing 3 columns (To Do, In Progress, Done) and 7 sample cards.
 
+### Local development: board overview snapshots
+
+For local development you can capture a comparable snapshot of everything shown on
+the **My Boards** overview: board counts, per-board column/card counts, and the
+empty states (users with no boards, boards without columns, boards without
+cards).
+
+```bash
+cd backend
+npm run snapshot          # aggregate and (over)write snapshots/board-overview.json
+npm run snapshot:check    # compare current data with the saved snapshot
+```
+
+- Repeating `npm run snapshot` **overwrites the previous snapshot**; the JSON is
+  deterministic (sorted, no timestamp), so runs can be diffed directly. The
+  command also prints changes versus the previous snapshot.
+- `npm run snapshot:check` never writes; it exits `0` when the current data
+  matches the saved snapshot and `2` when differences are found (and prints
+  them), which is useful as a quick local verification step.
+- The database is opened **read-only**; existing boards are never modified, and
+  creating / deleting / opening boards behaves exactly as before.
+- The run stops at an explicit numbered stage with a hint when a dependency is
+  missing (`1/4 dependencies`), the database cannot be opened
+  (`2/4 database`), aggregation fails (`3/4 aggregation`), or the snapshot
+  location is not writable (`4/4 snapshot`).
+- Custom locations are supported with `-- --db <path> --out <path>`.
+- Snapshots are dev-only artifacts and are git-ignored (`backend/snapshots/`).
+
 ## API Endpoints
 
 ### Authentication

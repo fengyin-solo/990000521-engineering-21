@@ -37,3 +37,6 @@ node_modules/
 
 # Trae
 .trae/
+
+# Local board overview snapshots (dev-only)
+backend/snapshots/

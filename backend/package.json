@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
-    "seed": "node db/seed.js"
+    "seed": "node db/seed.js",
+    "snapshot": "node scripts/board-overview-snapshot.js",
+    "snapshot:check": "node scripts/board-overview-snapshot.js --check"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
